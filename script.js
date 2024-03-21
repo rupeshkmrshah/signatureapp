@@ -122,11 +122,12 @@ canvasColor.addEventListener('change', (event) => {
     context.fillRect(0, 0, canvas.width, canvas.height);
 });
 
-// Use touch events for mobile devices
+// Use touch events for mobile devices with preventDefault for scrolling
 canvas.addEventListener('touchstart', (event) => {
     isDrawing = true;
     lastX = event.touches[0].offsetX;
     lastY = event.touches[0].offsetY;
+    event.preventDefault();
 });
 
 canvas.addEventListener('touchmove', (event) => {
@@ -138,6 +139,7 @@ canvas.addEventListener('touchmove', (event) => {
 
         lastX = event.touches[0].offsetX;
         lastY = event.touches[0].offsetY;
+        event.preventDefault(); // Prevent scrolling
     }
 });
 
@@ -182,4 +184,8 @@ saveButton.addEventListener('click', () => {
     link.click();
 });
 
-
+// Add event listener for the retrieve button (unchanged)
+retrieveButton.addEventListener('click', () => {
+    // Retrieve the saved canvas contents from local storage
+    let savedCanvas = localStorage.getItem('canvasContents');
+});
